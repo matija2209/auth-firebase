@@ -2,10 +2,9 @@ import React, { useRef, useState } from "react"
 import { useAuth } from "./contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
-export default function Login() {
+export default function ForgotPassword() {
   const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login,currentUser } = useAuth()
+  const { forgotPassword,currentUser } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -16,9 +15,8 @@ export default function Login() {
     try {
       setError("")
       setLoading(true)
-      const r = await login(emailRef.current.value, passwordRef.current.value)
-      console.log(r)
-      history.push("/")
+      await forgotPassword(emailRef.current.value)
+      history.push("/login")
     } catch {
       setError("Failed to log in")
     }
@@ -34,12 +32,7 @@ export default function Login() {
                     <label htmlFor="email">email address</label>
                     <input type="email" name="email" id="email" ref={emailRef}/>
                 </div>
-                <div className="">
-                    <label htmlFor="password">password</label>
-                    <input type="password" name="password" id="password" ref={passwordRef}/>
-                </div>
-               
-                <button disabled={loading}type="submit">login</button>
+                <button disabled={loading}type="submit">reset password</button>
                 <p>Don't have an account yet? <Link to="/signup">Signup here</Link></p>
                 <p>Forgot password? Reset <Link to="/forgotten-password">here</Link></p>
             </form>

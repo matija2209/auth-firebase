@@ -22,7 +22,7 @@ export default function Dashboard() {
         <div>
             <h2>Dashboard</h2>
             <hr />
-            {currentUser?.email}
+            {currentUser.email}
             {error && <p>{error}</p>}
             <button onClick={handleLogout}>logout</button>
         </div>
